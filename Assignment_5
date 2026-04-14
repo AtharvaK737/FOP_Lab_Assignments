@@ -1,0 +1,77 @@
+#include <stdio.h>
+
+void addition() {
+    int a[10][10], b[10][10], sum[10][10];
+    int r, c, i, j;
+
+    printf("Enter rows and columns: ");
+    scanf("%d %d", &r, &c);
+
+    printf("Enter Matrix A:\n");
+    for(i=0;i<r;i++)
+        for(j=0;j<c;j++)
+            scanf("%d",&a[i][j]);
+
+    printf("Enter Matrix B:\n");
+    for(i=0;i<r;i++)
+        for(j=0;j<c;j++)
+            scanf("%d",&b[i][j]);
+
+    for(i=0;i<r;i++)
+        for(j=0;j<c;j++)
+            sum[i][j] = a[i][j] + b[i][j];
+
+    printf("Result:\n");
+    for(i=0;i<r;i++){
+        for(j=0;j<c;j++)
+            printf("%d ", sum[i][j]);
+        printf("\n");
+    }
+}
+
+void saddle() {
+    int a[10][10], r, c, i, j, k, min, col;
+
+    printf("Enter rows and columns: ");
+    scanf("%d %d", &r, &c);
+
+    printf("Enter matrix:\n");
+    for(i=0;i<r;i++)
+        for(j=0;j<c;j++)
+            scanf("%d",&a[i][j]);
+
+    for(i=0;i<r;i++){
+        min = a[i][0]; col = 0;
+
+        for(j=1;j<c;j++){
+            if(a[i][j] < min){
+                min = a[i][j];
+                col = j;
+            }
+        }
+
+        for(k=0;k<r;k++){
+            if(a[k][col] > min)
+                break;
+        }
+
+        if(k==r){
+            printf("Saddle Point = %d\n", min);
+            return;
+        }
+    }
+    printf("No Saddle Point\n");
+}
+
+void inverse() {
+    float a[2][2], det;
+
+    printf("Enter 2x2 matrix:\n");
+    scanf("%f %f %f %f",&a[0][0],&a[0][1],&a[1][0],&a[1][1]);
+
+    det = a[0][0]*a[1][1] - a[0][1]*a[1][0];
+
+    if(det == 0){
+        printf("Inverse not possible\n");
+        return;
+    }
